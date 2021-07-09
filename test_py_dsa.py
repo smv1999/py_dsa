@@ -1,4 +1,5 @@
 from py_dsa.algorithms import *
+from py_dsa.data_structures import *
 
 search_arr = Searching()
 sort_arr = Sorting()
@@ -62,3 +63,21 @@ def test_py_dsa_algorithms_shell_sort():
     test_arr = [3, 1, 5, 4, 2]
     sort_arr.shell_sort(test_arr)
     assert test_arr == [1, 2, 3, 4, 5]
+
+def test_py_dsa_datastructures_stack():
+    test_stack = Stack()
+    test_stack.push(1)
+    test_stack.push(2)
+    test_stack.push(3)
+    test_stack.push(4)
+    test_stack.push(5)
+    assert test_stack.pop() == 5
+
+def test_py_dsa_datastructures_queue():
+    test_queue = Queue()
+    test_queue.enqueue(1)
+    test_queue.enqueue(2)
+    test_queue.enqueue(3)
+    test_queue.enqueue(4)
+    test_queue.enqueue(5)
+    assert test_queue.dequeue() == 1
