@@ -137,3 +137,178 @@ class LinkedList:
             while current != None:
                 print(current.data)
                 current = current.next
+
+
+class TreeNode:
+    """Method that creates a Tree Node"""
+
+    def __init__(self, data):
+        """Initialize the node"""
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+class Tree:
+    """Methods that perform various operations on Binary Tree using Tree Node"""
+
+    def __init__(self):
+        """Initialize the tree"""
+        self.root = None
+
+    def is_empty(self):
+        """Check if the tree is empty"""
+        return self.root == None
+
+    def add(self, data):
+        """Add an item to the binary tree"""
+        if self.is_empty():
+            self.root = TreeNode(data)
+        else:
+            current = self.root
+            while True:
+                if data < current.data:
+                    if current.left:
+                        current = current.left
+                    else:
+                        current.left = TreeNode(data)
+                        break
+                elif data > current.data:
+                    if current.right:
+                        current = current.right
+                    else:
+                        current.right = TreeNode(data)
+                        break
+                else:
+                    break
+
+    def print_tree(self):
+        """Print the tree"""
+        if self.is_empty():
+            print("Tree is empty")
+        else:
+            current = self.root
+            self.__print_node(current)
+
+    def __print_node(self, node):
+        """Print the node"""
+        if node == None:
+            return
+        else:
+            self.__print_node(node.left)
+            print(node.data)
+            self.__print_node(node.right)
+
+    def height(self):
+        """Return the height of the tree"""
+        if self.is_empty():
+            return 0
+        else:
+            return self.__height_node(self.root)
+
+    def __height_node(self, node):
+        """Return the height of the node"""
+        if node == None:
+            return 0
+        else:
+            return max(self.__height_node(node.left), self.__height_node(node.right)) + 1
+
+    def search(self, data):
+        """Search for an item in the tree"""
+        if self.is_empty():
+            return False
+        else:
+            current = self.root
+            while current != None:
+                if data < current.data:
+                    current = current.left
+                elif data > current.data:
+                    current = current.right
+                else:
+                    return True
+            return False
+
+    def remove(self, data):
+        """Delete an item from the binary tree"""
+        if self.is_empty():
+            return
+        else:
+            self.__remove_node(self.root, data)
+
+    def __remove_node(self, node, data):
+        """Delete the node"""
+        if node == None:
+            return
+        else:
+            if data < node.data:
+
+                node.left = self.__remove_node(node.left, data)
+            elif data > node.data:
+                node.right = self.__remove_node(node.right, data)
+            else:
+                if node.left == None:
+                    temp = node.right
+                    node = None
+                    return temp
+                elif node.right == None:
+                    temp = node.left
+                    node = None
+                    return temp
+                temp = self.__min_value_node(node.right)
+                node.data = temp.data
+                node.right = self.__remove_node(node.right, temp.data)
+            return node
+
+    def __min_value_node(self, node):
+        """Return the minimum value node"""
+        while node.left != None:
+            node = node.left
+        return node
+
+    def inorder_traversal(self):
+        """Inorder traversal of the tree"""
+        if self.is_empty():
+            return
+        else:
+            self.__inorder_traversal(self.root)
+
+    def __inorder_traversal(self, node):
+        """Inorder traversal"""
+        if node == None:
+            return
+        else:
+            self.__inorder_traversal(node.left)
+            print(node.data)
+            self.__inorder_traversal(node.right)
+
+    def preorder_traversal(self):
+        """Preorder traversal of the tree"""
+        if self.is_empty():
+            return
+        else:
+            self.__preorder_traversal(self.root)
+
+    def __preorder_traversal(self, node):
+        """Preorder traversal"""
+        if node == None:
+            return
+        else:
+            print(node.data)
+            self.__preorder_traversal(node.left)
+            self.__preorder_traversal(node.right)
+
+    def postorder_traversal(self):
+        """Postorder traversal of the tree"""
+        if self.is_empty():
+            return
+        else:
+            self.__postorder_traversal(self.root)
+
+    def __postorder_traversal(self, node):
+        """Postorder traversal"""
+        if node == None:
+            return
+        else:
+            self.__postorder_traversal(node.left)
+            self.__postorder_traversal(node.right)
+            print(node.data)

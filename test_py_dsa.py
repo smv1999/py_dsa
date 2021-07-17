@@ -91,3 +91,11 @@ def test_py_dsa_datastructures_linkedlist():
     test_linkedlist.add_first(20)
     test_linkedlist.add_first(30)
     assert test_linkedlist.head.data == 30
+
+def test_py_dsa_datastructures_tree():
+    test_tree = Tree()
+    test_tree.add(10)
+    test_tree.add(20)
+    test_tree.add(30)
+    test_tree.remove(20)
+    assert test_tree.height() == 2 and test_tree.root.data == 10
