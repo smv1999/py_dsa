@@ -103,3 +103,6 @@ cython_debug/
 
 # VS Code
 .vscode
+
+// extra files
+sample.py
