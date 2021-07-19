@@ -312,3 +312,61 @@ class Tree:
             self.__postorder_traversal(node.left)
             self.__postorder_traversal(node.right)
             print(node.data)
+
+
+class Graph:
+    """Methods that perform various operations on Graph"""
+
+    def __init__(self):
+        """Initialize the graph"""
+        self.graph = {}
+
+    def add_vertex(self, vertex):
+        """Add a vertex to the graph"""
+        if vertex not in self.graph:
+            self.graph[vertex] = []
+
+    def add_edge(self, vertex1, vertex2):
+        """Add an edge to the graph"""
+        if vertex1 in self.graph:
+            self.graph[vertex1].append(vertex2)
+        else:
+            self.graph[vertex1] = [vertex2]
+
+    def remove_vertex(self, vertex):
+        """Remove a vertex from the graph"""
+        if vertex in self.graph:
+            del self.graph[vertex]
+            for key in self.graph:
+                if vertex in self.graph[key]:
+                    self.graph[key].remove(vertex)
+
+    def remove_edge(self, vertex1, vertex2):
+        """Remove an edge from the graph"""
+        if vertex1 in self.graph:
+            if vertex2 in self.graph[vertex1]:
+                self.graph[vertex1].remove(vertex2)
+
+    def print_graph(self):
+        """Print the graph"""
+        for key in self.graph:
+            print(key, ":", self.graph[key])
+
+    def breadth_first_search(self, start):
+        """Breadth first search"""
+        visited = []
+        queue = [start]
+        while queue:
+            vertex = queue.pop(0)
+            if vertex not in visited:
+                visited.append(vertex)
+                queue.extend(self.graph[vertex])
+        return visited
+    def depth_first_search(self, node, visited=[]):
+        """Depth first search"""
+        if node not in visited:
+            visited.append(node)
+            for i in self.graph[node]:
+                self.depth_first_search(i, visited)
+        return visited
+        

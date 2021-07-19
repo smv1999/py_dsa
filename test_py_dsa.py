@@ -99,3 +99,14 @@ def test_py_dsa_datastructures_tree():
     test_tree.add(30)
     test_tree.remove(20)
     assert test_tree.height() == 2 and test_tree.root.data == 10
+
+def test_py_dsa_datastructures_graph():
+    test_graph = Graph()
+    test_graph.add_edge(0, 1)
+    test_graph.add_edge(0, 2)
+    test_graph.add_edge(1, 2)
+    test_graph.add_edge(2, 0)
+    test_graph.add_edge(2, 3)
+    test_graph.add_edge(3, 3)
+    assert test_graph.breadth_first_search(2) == [2, 0, 3, 1] and test_graph.depth_first_search(2) == [2, 0, 1, 3]
+
