@@ -138,6 +138,20 @@ class LinkedList:
                 print(current.data)
                 current = current.next
 
+    def reverse_list(self):
+        """Reverses the list"""
+        if self.is_empty():
+            return None
+        else:
+            current = self.head
+            prev = None
+            while current != None:
+                next = current.next
+                current.next = prev
+                prev = current
+                current = next
+            self.head = prev
+
 
 class TreeNode:
     """Method that creates a Tree Node"""
@@ -181,23 +195,6 @@ class Tree:
                         break
                 else:
                     break
-
-    def print_tree(self):
-        """Print the tree"""
-        if self.is_empty():
-            print("Tree is empty")
-        else:
-            current = self.root
-            self.__print_node(current)
-
-    def __print_node(self, node):
-        """Print the node"""
-        if node == None:
-            return
-        else:
-            self.__print_node(node.left)
-            print(node.data)
-            self.__print_node(node.right)
 
     def height(self):
         """Return the height of the tree"""
@@ -259,34 +256,58 @@ class Tree:
                 node.right = self.__remove_node(node.right, temp.data)
             return node
 
+    def invert_tree(self):
+        """Invert the tree"""
+        if self.is_empty():
+            return None
+        else:
+            self.__invert_tree(self.root)
+
+    def __invert_tree(self, node):
+        """Invert the tree"""
+        if node == None:
+            return
+        else:
+            node.left, node.right = node.right, node.left
+            self.__invert_tree(node.left)
+            self.__invert_tree(node.right)
+
     def __min_value_node(self, node):
         """Return the minimum value node"""
         while node.left != None:
             node = node.left
         return node
 
-    def inorder_traversal(self):
-        """Inorder traversal of the tree"""
+    def print_tree(self, traversal='inorder'):
+        """Prints the tree in in-order by default.
+           Takes an optional argument traversal to print in preorder or postorder 
+        """
         if self.is_empty():
+            print("Tree is empty")
+        else:
+            current = self.root
+            self.__print_node(current, traversal)
+
+    def __print_node(self, node, traversal):
+        """Print the node"""
+        if node == None:
             return
         else:
-            self.__inorder_traversal(self.root)
+            if traversal == 'inorder':
+                self.__inorder_traversal(self.root)
+            elif traversal == 'preorder':
+                self.__preorder_traversal(self.root)
+            else:
+                self.__postorder_traversal(self.root)
 
     def __inorder_traversal(self, node):
-        """Inorder traversal"""
+        """Inorder traversal of the tree"""
         if node == None:
             return
         else:
             self.__inorder_traversal(node.left)
             print(node.data)
             self.__inorder_traversal(node.right)
-
-    def preorder_traversal(self):
-        """Preorder traversal of the tree"""
-        if self.is_empty():
-            return
-        else:
-            self.__preorder_traversal(self.root)
 
     def __preorder_traversal(self, node):
         """Preorder traversal"""
@@ -296,13 +317,6 @@ class Tree:
             print(node.data)
             self.__preorder_traversal(node.left)
             self.__preorder_traversal(node.right)
-
-    def postorder_traversal(self):
-        """Postorder traversal of the tree"""
-        if self.is_empty():
-            return
-        else:
-            self.__postorder_traversal(self.root)
 
     def __postorder_traversal(self, node):
         """Postorder traversal"""
@@ -362,6 +376,7 @@ class Graph:
                 visited.append(vertex)
                 queue.extend(self.graph[vertex])
         return visited
+
     def depth_first_search(self, node, visited=[]):
         """Depth first search"""
         if node not in visited:
@@ -369,4 +384,3 @@ class Graph:
             for i in self.graph[node]:
                 self.depth_first_search(i, visited)
         return visited
-        
