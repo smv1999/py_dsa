@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='py_dsa',
-    version='0.0.1',
+    version='0.0.2',
     description='The py_dsa module contains all the data structures and algorithms implementations',
     py_modules=["py_dsa"],
     package_dir={'': 'src'},
