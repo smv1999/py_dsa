@@ -1,13 +1,14 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
     name='py_dsa',
-    version='0.0.2',
-    description='The py_dsa module contains all the data structures and algorithms implementations',
-    py_modules=["py_dsa"],
+    version='0.0.3',
+    description='The py_dsa package contains all the data structures and algorithms implementations',
+    packages=['py_dsa'],
+    py_modules=['py_dsa.algorithms', 'py_dsa.data_structures'],
     package_dir={'': 'src'},
     extras_require={
         "dev": [
