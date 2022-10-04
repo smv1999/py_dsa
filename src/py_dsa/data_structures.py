@@ -128,6 +128,21 @@ class LinkedList:
         else:
             prev_node.next = next_node
 
+    def sorted_insert(self,data):
+        "Insert the Data in Sorted Linked List"
+        temp=Node(data)
+        if self.head==None:
+            self.head=temp
+        elif x<self.head.data:
+            temp.next=head
+            self.head=temp
+        else:
+            curr=self.head
+            while curr.next!=None and curr.next.data<x:
+                curr=curr.next
+            temp.next=curr.next
+            curr.next=temp
+
     def print_list(self):
         """Print the list"""
         if self.is_empty():
